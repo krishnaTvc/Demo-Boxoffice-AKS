@@ -12,8 +12,8 @@ if not re.fullmatch(r'[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}', a.tag):
     parser.error('Invalid image tag')
 try:
     network = ipaddress.ip_network(a.client_cidr, strict=True)
-    if network.version != 4 or network.prefixlen == 0:
-        raise ValueError('Use a restricted IPv4 CIDR, normally your public IP/32')
+    if network.version != 4:
+        raise ValueError('Use a valid IPv4 CIDR')
 except ValueError as exc:
     parser.error(str(exc))
 root = pathlib.Path(__file__).resolve().parents[1]
